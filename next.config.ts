@@ -39,6 +39,12 @@ const nextConfig: NextConfig = {
         hostname: 'img.pokemondb.net',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'legends.arceus.pokemon.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

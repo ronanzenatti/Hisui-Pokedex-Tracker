@@ -63,8 +63,8 @@ export function PokemonCard({ pokemon, isCaptured, onCaptureChange, isResearched
   return (
     <Card 
       className={cn(
-        "transform transition-all duration-300 hover:scale-105 hover:shadow-xl focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
-        isCaptured ? 'bg-primary/10' : 'bg-card'
+        "transform transition-all duration-300 hover:scale-105 hover:shadow-xl focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 bg-cover bg-center",
+        isCaptured ? 'bg-captured-gradient' : 'bg-card'
       )}
     >
       <CardContent className="relative p-4 flex flex-col items-center justify-center gap-2">
