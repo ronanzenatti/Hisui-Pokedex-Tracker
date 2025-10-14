@@ -1,7 +1,7 @@
 import type { Pokemon } from '@/types/pokemon';
 
 const createPokemon = (id: number, name: string, types: string[], isHisuian: boolean = false): Pokemon => {
-  const imageName = name.toLowerCase().replace(' ', '-').replace("'", "");
+  const imageName = name.toLowerCase().replace(' ', '-').replace("'", "").replace(".", "");
   const imageUrl = `https://img.pokemondb.net/sprites/legends-arceus/normal/${imageName}${isHisuian ? '-hisuian' : ''}.png`;
   
   // Special cases for forms
