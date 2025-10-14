@@ -85,7 +85,7 @@ export default function Home() {
               <Skeleton className="w-12 h-12" />
               <h1 className="text-4xl md:text-5xl font-bold font-headline">Hisui Pokédex Tracker</h1>
           </div>
-          <p className="text-muted-foreground mt-2">Controle seus Pokémon capturados e pesquisados em Legends: Arceus</p>
+          <p className="mt-2 text-cyan-200">Controle seus Pokémon capturados e pesquisados em Legends: Arceus</p>
         </header>
         <div className="mb-8 sticky top-4 z-10 bg-background/80 backdrop-blur-sm p-4 rounded-lg shadow-sm border">
           <Skeleton className="h-5 w-48 mb-2" />
@@ -115,7 +115,7 @@ export default function Home() {
             <Image src="https://legends.arceus.pokemon.com/en-us/assets/arceus-logo.png" alt="Arceus logo" width={100} height={48} unoptimized/>
             <div>
               <h1 className="text-4xl md:text-5xl font-bold font-headline text-lime-500">Hisui Pokédex Tracker</h1>
-              <p className="text-muted-foreground text-cyan-200 mt-2">Rastreie seus Pokémon capturados em Legends: Arceus</p>
+              <p className="text-cyan-200 mt-2">Controle seus Pokémon capturados e pesquisados em Legends: Arceus</p>
             </div>
         </div>
       </header>
@@ -150,12 +150,12 @@ export default function Home() {
         </div>
       ) : (
         <div className="text-center py-16">
-          <p className="text-lg text-muted-foreground text-red-500">Nenhum Pokémon encontrado.</p>
+          <p className="text-lg text-red-500">Nenhum Pokémon encontrado.</p>
         </div>
       )}
 
       <footer className="text-center mt-12 py-4 border-t">
-        <p className="text-sm text-muted-foreground text-cyan-300">Criado com ❤️ para treinadores de Hisui - Pokemon Arceus.</p>
+        <p className="text-sm text-cyan-300">Criado com ❤️ para treinadores de Hisui - Pokemon Arceus.</p>
       </footer>
     </main>
   );
