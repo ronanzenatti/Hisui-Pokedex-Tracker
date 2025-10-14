@@ -106,10 +106,6 @@ export default function Home() {
     </main>
   );
 
-  if (!isClient) {
-    return <LoadingSkeleton />;
-  }
-
   return (
     <main className="container mx-auto px-4 py-8">
       <header className="text-center mb-8">
@@ -120,13 +116,20 @@ export default function Home() {
         <p className="text-muted-foreground mt-2">Rastreie seus Pokémon capturados em Legends: Arceus</p>
       </header>
       
-      <div className="mb-8 sticky top-4 z-10 bg-background/80 backdrop-blur-sm p-4 rounded-lg shadow-sm border">
-        <div className="flex justify-between items-center mb-2">
-            <h3 className="font-semibold text-foreground">{capturedCount} / {totalPokemon} Capturados</h3>
-            <h3 className="font-semibold text-foreground">{researchedSet.size} / {totalPokemon} Pesquisados</h3>
+      {!isClient ? (
+        <div className="mb-8 sticky top-4 z-10 bg-background/80 backdrop-blur-sm p-4 rounded-lg shadow-sm border">
+          <Skeleton className="h-5 w-48 mb-2" />
+          <Skeleton className="h-4 w-full" />
         </div>
-        <Progress value={progressValue} className="w-full" aria-label={`${capturedCount} out of ${totalPokemon} Pokémon captured`} />
-      </div>
+      ) : (
+        <div className="mb-8 sticky top-4 z-10 bg-background/80 backdrop-blur-sm p-4 rounded-lg shadow-sm border">
+            <div className="flex justify-between items-center mb-2">
+                <h3 className="font-semibold text-foreground">{capturedCount} / {totalPokemon} Capturados</h3>
+                <h3 className="font-semibold text-foreground">{researchedSet.size} / {totalPokemon} Pesquisados</h3>
+            </div>
+            <Progress value={progressValue} className="w-full" aria-label={`${capturedCount} out of ${totalPokemon} Pokémon captured`} />
+        </div>
+      )}
 
       <Controls
         searchQuery={searchQuery}
@@ -135,7 +138,17 @@ export default function Home() {
         setSortOption={setSortOption}
       />
 
-      {filteredAndSortedPokemon.length > 0 ? (
+      {!isClient ? (
+         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          {Array.from({ length: 18 }).map((_, i) => (
+            <div key={i} className="flex flex-col items-center gap-2 p-4 rounded-lg border bg-card">
+              <Skeleton className="w-24 h-24 rounded-full" />
+              <Skeleton className="h-4 w-16" />
+              <Skeleton className="h-6 w-24" />
+            </div>
+          ))}
+        </div>
+      ) : filteredAndSortedPokemon.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
           {filteredAndSortedPokemon.map((pokemon) => (
             <PokemonCard
