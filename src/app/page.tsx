@@ -80,7 +80,7 @@ export default function Home() {
   if (!isClient) {
     return (
       <main className="container mx-auto px-4 py-8">
-        <header className="text-center mb-8">
+        <header className="mb-8">
           <div className="flex items-center justify-center gap-4">
               <Skeleton className="w-12 h-12" />
               <h1 className="text-4xl md:text-5xl font-bold font-headline">Hisui Pokédex Tracker</h1>
@@ -110,9 +110,9 @@ export default function Home() {
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <header className="text-center mb-8">
+      <header className="mb-8">
         <div className="flex items-center justify-center gap-4">
-            <Image src="https://legends.arceus.pokemon.com/en-us/assets/arceus-logo.png" alt="Arceus logo" width={48} height={48} />
+            <Image src="https://legends.arceus.pokemon.com/en-us/assets/arceus-logo.png" alt="Arceus logo" width={100} height={48} unoptimized/>
             <div>
               <h1 className="text-4xl md:text-5xl font-bold font-headline text-lime-500">Hisui Pokédex Tracker</h1>
               <p className="text-muted-foreground text-cyan-200 mt-2">Rastreie seus Pokémon capturados em Legends: Arceus</p>
