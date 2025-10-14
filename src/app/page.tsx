@@ -122,8 +122,8 @@ export default function Home() {
       
       <div className="mb-8 sticky top-4 z-10 bg-background/80 backdrop-blur-sm p-4 rounded-lg shadow-sm border">
           <div className="flex justify-between items-center mb-2">
-              <h3 className="font-semibold text-foreground">{capturedCount} / {totalPokemon} Capturados</h3>
-              <h3 className="font-semibold text-foreground">{researchedSet.size} / {totalPokemon} Pesquisados</h3>
+              <h3 className="font-semibold text-foreground text-red-500">{capturedCount} / {totalPokemon} Capturados</h3>
+              <h3 className="font-semibold text-foreground text-lime-700">{researchedSet.size} / {totalPokemon} Pesquisados</h3>
           </div>
           <Progress value={progressValue} className="w-full" aria-label={`${capturedCount} out of ${totalPokemon} Pokémon captured`} />
       </div>
@@ -150,12 +150,12 @@ export default function Home() {
         </div>
       ) : (
         <div className="text-center py-16">
-          <p className="text-lg text-muted-foreground">Nenhum Pokémon encontrado.</p>
+          <p className="text-lg text-muted-foreground text-red-500">Nenhum Pokémon encontrado.</p>
         </div>
       )}
 
       <footer className="text-center mt-12 py-4 border-t">
-        <p className="text-sm text-muted-foreground">Criado com ❤️ para treinadores de Hisui.</p>
+        <p className="text-sm text-muted-foreground text-cyan-300">Criado com ❤️ para treinadores de Hisui.</p>
       </footer>
     </main>
   );
