@@ -11,6 +11,8 @@ interface PokemonCardProps {
   pokemon: Pokemon;
   isCaptured: boolean;
   onCaptureChange: (captured: boolean) => void;
+  isResearched: boolean;
+  onResearchChange: (researched: boolean) => void;
 }
 
 const typeColorMap: { [key: string]: string } = {
@@ -34,8 +36,29 @@ const typeColorMap: { [key: string]: string } = {
     Fairy: 'bg-pink-300',
   };
 
-export function PokemonCard({ pokemon, isCaptured, onCaptureChange }: PokemonCardProps) {
+const PokeballIcon = ({ isResearched, ...props }: { isResearched: boolean } & React.SVGProps<SVGSVGElement>) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z" />
+      <path d="M12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill={isResearched ? 'white' : 'none'}/>
+      <path d="M2 12h20" />
+      <path d="M12 2a10 10 0 0 0-10 10" fill={isResearched ? '#ef4444' : 'none'} />
+    </svg>
+  );
+
+export function PokemonCard({ pokemon, isCaptured, onCaptureChange, isResearched, onResearchChange }: PokemonCardProps) {
   const checkboxId = `capture-${pokemon.id}`;
+  const pokeballId = `research-${pokemon.id}`;
 
   return (
     <Card 
@@ -45,6 +68,15 @@ export function PokemonCard({ pokemon, isCaptured, onCaptureChange }: PokemonCar
       )}
     >
       <CardContent className="relative p-4 flex flex-col items-center justify-center gap-2">
+        <button
+            id={pokeballId}
+            onClick={() => onResearchChange(!isResearched)}
+            aria-label={`Marcar pesquisa de ${pokemon.name} como concluída`}
+            className="absolute top-2 left-2 z-10 cursor-pointer"
+        >
+            <PokeballIcon isResearched={isResearched} className={cn("h-6 w-6 transition-colors", isResearched ? "text-red-500" : "text-gray-400 hover:text-gray-500")} />
+        </button>
+
         <div className="absolute top-2 right-2 z-10">
           <Checkbox
             id={checkboxId}

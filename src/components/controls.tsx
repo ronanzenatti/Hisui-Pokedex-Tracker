@@ -33,6 +33,8 @@ export function Controls({ searchQuery, setSearchQuery, sortOption, setSortOptio
           <SelectItem value="id-desc">Número (decrescente)</SelectItem>
           <SelectItem value="name-asc">Nome (A-Z)</SelectItem>
           <SelectItem value="name-desc">Nome (Z-A)</SelectItem>
+          <SelectItem value="researched-first">Pesquisados</SelectItem>
+          <SelectItem value="not-researched-first">Não pesquisados</SelectItem>
         </SelectContent>
       </Select>
     </div>

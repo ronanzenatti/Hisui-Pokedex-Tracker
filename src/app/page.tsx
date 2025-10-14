@@ -11,6 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Home() {
   const [capturedPokemonIds, setCapturedPokemonIds] = useLocalStorage<number[]>('captured-pokemon', []);
+  const [researchedPokemonIds, setResearchedPokemonIds] = useLocalStorage<number[]>('researched-pokemon', []);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState('id-asc');
   const [isClient, setIsClient] = useState(false);
@@ -20,11 +21,24 @@ export default function Home() {
   }, []);
 
   const capturedSet = useMemo(() => new Set(capturedPokemonIds), [capturedPokemonIds]);
+  const researchedSet = useMemo(() => new Set(researchedPokemonIds), [researchedPokemonIds]);
 
   const handleCaptureChange = (pokemonId: number, captured: boolean) => {
     setCapturedPokemonIds((prev) => {
       const newSet = new Set(prev);
       if (captured) {
+        newSet.add(pokemonId);
+      } else {
+        newSet.delete(pokemonId);
+      }
+      return Array.from(newSet);
+    });
+  };
+
+  const handleResearchChange = (pokemonId: number, researched: boolean) => {
+    setResearchedPokemonIds((prev) => {
+      const newSet = new Set(prev);
+      if (researched) {
         newSet.add(pokemonId);
       } else {
         newSet.delete(pokemonId);
@@ -48,12 +62,16 @@ export default function Home() {
           return a.name.localeCompare(b.name);
         case 'name-desc':
           return b.name.localeCompare(a.name);
+        case 'researched-first':
+          return (researchedSet.has(b.id) ? 1 : 0) - (researchedSet.has(a.id) ? 1 : 0);
+        case 'not-researched-first':
+          return (researchedSet.has(a.id) ? 1 : 0) - (researchedSet.has(b.id) ? 1 : 0);
         case 'id-asc':
         default:
           return a.id - b.id;
       }
     });
-  }, [searchQuery, sortOption]);
+  }, [searchQuery, sortOption, researchedSet]);
   
   const totalPokemon = pokemonList.length;
   const capturedCount = capturedSet.size;
@@ -105,6 +123,7 @@ export default function Home() {
       <div className="mb-8 sticky top-4 z-10 bg-background/80 backdrop-blur-sm p-4 rounded-lg shadow-sm border">
         <div className="flex justify-between items-center mb-2">
             <h3 className="font-semibold text-foreground">{capturedCount} / {totalPokemon} Capturados</h3>
+            <h3 className="font-semibold text-foreground">{researchedSet.size} / {totalPokemon} Pesquisados</h3>
         </div>
         <Progress value={progressValue} className="w-full" aria-label={`${capturedCount} out of ${totalPokemon} Pokémon captured`} />
       </div>
@@ -123,7 +142,9 @@ export default function Home() {
               key={pokemon.id}
               pokemon={pokemon}
               isCaptured={capturedSet.has(pokemon.id)}
+              isResearched={researchedSet.has(pokemon.id)}
               onCaptureChange={(captured) => handleCaptureChange(pokemon.id, captured)}
+              onResearchChange={(researched) => handleResearchChange(pokemon.id, researched)}
             />
           ))}
         </div>
