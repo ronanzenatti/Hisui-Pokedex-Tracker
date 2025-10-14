@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'static.pokédex.net',
+        hostname: 'static.xn--pokdex-dva.net',
         port: '',
         pathname: '/**',
       },
