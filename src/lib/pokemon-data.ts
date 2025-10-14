@@ -1,22 +1,77 @@
 import type { Pokemon } from '@/types/pokemon';
 
-const createPokemon = (id: number, name: string, types: string[]): Pokemon => ({
-  id,
-  name,
-  imageUrl: `https://img.pokemondb.net/sprites/legends-arceus/normal/${name.toLowerCase().replace(' ', '-').replace("'", "")}.png`,
-  types,
-});
+const createPokemon = (id: number, name: string, types: string[], isHisuian: boolean = false): Pokemon => {
+  const imageName = name.toLowerCase().replace(' ', '-').replace("'", "");
+  const imageUrl = `https://img.pokemondb.net/sprites/legends-arceus/normal/${imageName}${isHisuian ? '-hisuian' : ''}.png`;
+  
+  // Special cases for forms
+  if (name === 'Wormadam') {
+    return {
+      id,
+      name,
+      imageUrl: `https://img.pokemondb.net/sprites/legends-arceus/normal/wormadam-plant.png`,
+      types
+    };
+  }
+  if (name === 'Basculin') {
+    return {
+      id,
+      name,
+      imageUrl: `https://img.pokemondb.net/sprites/legends-arceus/normal/basculin-white-striped.png`,
+      types
+    };
+  }
+  if (name === 'Tornadus' || name === 'Thundurus' || name === 'Landorus' || name === 'Enamorus') {
+    return {
+      id,
+      name,
+      imageUrl: `https://img.pokemondb.net/sprites/legends-arceus/normal/${imageName}-incarnate.png`,
+      types
+    };
+  }
+  if (name === 'Dialga' || name === 'Palkia') {
+    return {
+      id,
+      name,
+      imageUrl: `https://img.pokemondb.net/sprites/legends-arceus/normal/${imageName}-origin.png`,
+      types
+    };
+  }
+  if (name === 'Shaymin') {
+    return {
+      id,
+      name,
+      imageUrl: `https://img.pokemondb.net/sprites/legends-arceus/normal/shaymin-land.png`,
+      types
+    };
+  }
+  if (name === 'Giratina') {
+    return {
+      id,
+      name,
+      imageUrl: `https://img.pokemondb.net/sprites/legends-arceus/normal/giratina-origin.png`,
+      types
+    };
+  }
+
+  return {
+    id,
+    name,
+    imageUrl,
+    types,
+  };
+};
 
 export const pokemonList: Pokemon[] = [
   createPokemon(1, 'Rowlet', ['Grass', 'Flying']),
   createPokemon(2, 'Dartrix', ['Grass', 'Flying']),
-  createPokemon(3, 'Decidueye', ['Grass', 'Fighting']),
+  createPokemon(3, 'Decidueye', ['Grass', 'Fighting'], true),
   createPokemon(4, 'Cyndaquil', ['Fire']),
   createPokemon(5, 'Quilava', ['Fire']),
-  createPokemon(6, 'Typhlosion', ['Fire', 'Ghost']),
+  createPokemon(6, 'Typhlosion', ['Fire', 'Ghost'], true),
   createPokemon(7, 'Oshawott', ['Water']),
   createPokemon(8, 'Dewott', ['Water']),
-  createPokemon(9, 'Samurott', ['Water', 'Dark']),
+  createPokemon(9, 'Samurott', ['Water', 'Dark'], true),
   createPokemon(10, 'Bidoof', ['Normal']),
   createPokemon(11, 'Bibarel', ['Normal', 'Water']),
   createPokemon(12, 'Starly', ['Normal', 'Flying']),
@@ -91,7 +146,7 @@ export const pokemonList: Pokemon[] = [
   createPokemon(81, 'Gyarados', ['Water', 'Flying']),
   createPokemon(82, 'Shellos', ['Water']),
   createPokemon(83, 'Gastrodon', ['Water', 'Ground']),
-  createPokemon(84, 'Qwilfish', ['Dark', 'Poison']),
+  createPokemon(84, 'Qwilfish', ['Dark', 'Poison'], true),
   createPokemon(85, 'Overqwil', ['Dark', 'Poison']),
   createPokemon(86, 'Happiny', ['Normal']),
   createPokemon(87, 'Chansey', ['Normal']),
@@ -101,7 +156,7 @@ export const pokemonList: Pokemon[] = [
   createPokemon(91, 'Roserade', ['Grass', 'Poison']),
   createPokemon(92, 'Carnivine', ['Grass']),
   createPokemon(93, 'Petilil', ['Grass']),
-  createPokemon(94, 'Lilligant', ['Grass', 'Fighting']),
+  createPokemon(94, 'Lilligant', ['Grass', 'Fighting'], true),
   createPokemon(95, 'Tangela', ['Grass']),
   createPokemon(96, 'Tangrowth', ['Grass']),
   createPokemon(97, 'Barboach', ['Water', 'Ground']),
@@ -123,8 +178,8 @@ export const pokemonList: Pokemon[] = [
   createPokemon(113, 'Ursaring', ['Normal']),
   createPokemon(114, 'Ursaluna', ['Ground', 'Normal']),
   createPokemon(115, 'Goomy', ['Dragon']),
-  createPokemon(116, 'Sliggoo', ['Steel', 'Dragon']),
-  createPokemon(117, 'Goodra', ['Steel', 'Dragon']),
+  createPokemon(116, 'Sliggoo', ['Steel', 'Dragon'], true),
+  createPokemon(117, 'Goodra', ['Steel', 'Dragon'], true),
   createPokemon(118, 'Onix', ['Rock', 'Ground']),
   createPokemon(119, 'Steelix', ['Steel', 'Ground']),
   createPokemon(120, 'Rhyhorn', ['Rock', 'Ground']),
@@ -145,8 +200,8 @@ export const pokemonList: Pokemon[] = [
   createPokemon(135, 'Empoleon', ['Water', 'Steel']),
   createPokemon(136, 'Vulpix', ['Fire']),
   createPokemon(137, 'Ninetales', ['Fire']),
-  createPokemon(138, 'Growlithe', ['Fire', 'Rock']),
-  createPokemon(139, 'Arcanine', ['Fire', 'Rock']),
+  createPokemon(138, 'Growlithe', ['Fire', 'Rock'], true),
+  createPokemon(139, 'Arcanine', ['Fire', 'Rock'], true),
   createPokemon(140, 'Tentacool', ['Water', 'Poison']),
   createPokemon(141, 'Tentacruel', ['Water', 'Poison']),
   createPokemon(142, 'Finneon', ['Water']),
@@ -169,8 +224,8 @@ export const pokemonList: Pokemon[] = [
   createPokemon(159, 'Garchomp', ['Dragon', 'Ground']),
   createPokemon(160, 'Nosepass', ['Rock']),
   createPokemon(161, 'Probopass', ['Rock', 'Steel']),
-  createPokemon(162, 'Voltorb', ['Electric', 'Grass']),
-  createPokemon(163, 'Electrode', ['Electric', 'Grass']),
+  createPokemon(162, 'Voltorb', ['Electric', 'Grass'], true),
+  createPokemon(163, 'Electrode', ['Electric', 'Grass'], true),
   createPokemon(164, 'Rotom', ['Electric', 'Ghost']),
   createPokemon(165, 'Chingling', ['Psychic']),
   createPokemon(166, 'Chimecho', ['Psychic']),
@@ -179,7 +234,7 @@ export const pokemonList: Pokemon[] = [
   createPokemon(169, 'Cleffa', ['Fairy']),
   createPokemon(170, 'Clefairy', ['Fairy']),
   createPokemon(171, 'Clefable', ['Fairy']),
-  createPokemon(172, 'Sneasel', ['Fighting', 'Poison']),
+  createPokemon(172, 'Sneasel', ['Fighting', 'Poison'], true),
   createPokemon(173, 'Sneasler', ['Fighting', 'Poison']),
   createPokemon(174, 'Weavile', ['Dark', 'Ice']),
   createPokemon(175, 'Murkrow', ['Dark', 'Flying']),
@@ -206,13 +261,13 @@ export const pokemonList: Pokemon[] = [
   createPokemon(196, 'Piloswine', ['Ice', 'Ground']),
   createPokemon(197, 'Mamoswine', ['Ice', 'Ground']),
   createPokemon(198, 'Bergmite', ['Ice']),
-  createPokemon(199, 'Avalugg', ['Ice', 'Rock']),
+  createPokemon(199, 'Avalugg', ['Ice', 'Rock'], true),
   createPokemon(200, 'Snover', ['Grass', 'Ice']),
   createPokemon(201, 'Abomasnow', ['Grass', 'Ice']),
-  createPokemon(202, 'Zorua', ['Normal', 'Ghost']),
-  createPokemon(203, 'Zoroark', ['Normal', 'Ghost']),
+  createPokemon(202, 'Zorua', ['Normal', 'Ghost'], true),
+  createPokemon(203, 'Zoroark', ['Normal', 'Ghost'], true),
   createPokemon(204, 'Rufflet', ['Normal', 'Flying']),
-  createPokemon(205, 'Braviary', ['Psychic', 'Flying']),
+  createPokemon(205, 'Braviary', ['Psychic', 'Flying'], true),
   createPokemon(206, 'Riolu', ['Fighting']),
   createPokemon(207, 'Lucario', ['Fighting', 'Steel']),
   createPokemon(208, 'Uxie', ['Psychic']),
