@@ -5,6 +5,8 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-image: url('https://legends.arceus.pokemon.com/assets/bg-weave-dark.jpg');
+  background-repeat: repeat;
 }
 
 @layer base {
